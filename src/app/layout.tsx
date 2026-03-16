@@ -4,8 +4,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
-const title = "Tina Mai";
-const description = "19-year-old builder, machine learning researcher, and designer. Studying Computer Science and Computational Biology at Stanford University.";
+const title = "Nikhil Krishnaswamy";
+const description = "Incoming Stanford freshman building wearable neurotechnology across bioengineering, hardware, and machine learning.";
 
 export const metadata: Metadata = {
 	title: {
@@ -13,10 +13,10 @@ export const metadata: Metadata = {
 		template: `%s | ${title}`,
 	},
 	description: description,
-	keywords: ["tina mai", "tina", "mai", "tinamai", "stanford", "startup", "founder", "design", "engineer", "builder", "machine learning", "ai", "computer science", "product design"],
-	authors: [{ name: "Tina Mai" }],
-	creator: "Tina Mai",
-	publisher: "Tina Mai",
+	keywords: ["nikhil krishnaswamy", "nikhil", "stanford", "incoming freshman", "bioengineering", "biomechanical engineering", "computer science", "symbolic systems", "eeg", "fnirs", "hardware", "machine learning"],
+	authors: [{ name: "Nikhil Krishnaswamy" }],
+	creator: "Nikhil Krishnaswamy",
+	publisher: "Nikhil Krishnaswamy",
 	formatDetection: {
 		email: false,
 		address: false,
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 				url: "/opengraph-image.png",
 				width: 1200,
 				height: 630,
-				alt: "Tina Mai",
+				alt: "Nikhil Krishnaswamy",
 				type: "image/png",
 			},
 		],
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 				url: "/twitter-image.png",
 				width: 1200,
 				height: 630,
-				alt: "Tina Mai",
+				alt: "Nikhil Krishnaswamy",
 				type: "image/png",
 			},
 		],

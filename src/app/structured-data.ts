@@ -2,17 +2,16 @@ export const generateStructuredData = () => {
 	return {
 		"@context": "https://schema.org",
 		"@type": "Person",
-		name: "Tina Mai",
+		name: "Nikhil Krishnaswamy",
 		url: "https://tinabmai.com",
-		sameAs: ["https://linkedin.com/in/tinabmai", "https://github.com/tina-mai", "https://x.com/tinabmai", "https://instagram.com/tinammai"],
-		jobTitle: "Startup Founder",
-		description: "Tina Mai is an 19-year-old startup founder and developer building in the machine learning space.",
+		jobTitle: "Incoming Stanford Freshman",
+		description: "Nikhil Krishnaswamy is an incoming Stanford freshman building wearable neurotechnology at the intersection of bioengineering and machine learning.",
 		image: {
 			"@type": "ImageObject",
 			url: "https://tinabmai.com/profile.jpg",
 			width: "135",
 			height: "180",
-			caption: "Tina Mai",
+			caption: "Nikhil Krishnaswamy",
 		},
 	};
 };
