@@ -60,10 +60,10 @@ const Cursor = () => {
 					zIndex: 18,
 					pointerEvents: "none",
 					display: "none",
-					width: "64px",
-					height: "64px",
+					width: "120px",
+					height: "120px",
 					borderRadius: "9999px",
-					background: "radial-gradient(circle, rgba(125, 211, 252, 0.45) 0%, rgba(56, 189, 248, 0.18) 40%, rgba(15, 23, 42, 0) 75%)",
+					background: "radial-gradient(circle, rgba(125, 211, 252, 0.2) 0%, rgba(56, 189, 248, 0.1) 42%, rgba(15, 23, 42, 0) 78%)",
 				}}
 			/>
 			<Image

@@ -4,7 +4,7 @@ import ScrambleText from "../Global/ScrambleText";
 const Intro = () => {
 	return (
 		<div className="space-y-6 max-w-4xl">
-			<h1 className="font-serif2 text-3xl sm:text-5xl leading-tight">hi, i&apos;m nikhil k.</h1>
+			<h1 className="font-serif2 text-3xl sm:text-5xl leading-tight">hi, i&apos;m nikhil.</h1>
 			<ScrambleText
 				text="incoming freshman at Stanford, building wearable neurotechnology at the intersection of bioengineering, hardware, and machine learning."
 				settings={{ speed: 0.5 }}

@@ -3,46 +3,25 @@ import Link from "../Global/Link";
 
 const specifics = [
 	{
-		title: "Bioengineering Intern — Stanford Institutes of Medicinal Research",
-		subtitle: "Jun – Aug 2025",
+		title: "Research",
+		subtitle: "EEG + computational neuroscience",
 		cardClass: "sm:col-span-2 sm:rotate-[-1deg]",
 		details:
-			"Selected as 1 of 20 from 1,800+ applicants. Built a portable single-channel fNIRS device with custom PCB and iterated through soldering, drop testing, and clinical wear trials.",
+			"Independent research at Peter Tass Lab (Stanford): comparative EEG seizure prediction analysis and ongoing neural mass model work with The Virtual Brain to explore stimulation strategies for seizure suppression.",
 	},
 	{
-		title: "Founder & Product Lead — Neuropod Technologies",
-		subtitle: "Aug 2024 – Jun 2025",
+		title: "Internships",
+		subtitle: "Biomedical devices + on-device AI",
 		cardClass: "sm:col-span-1 sm:translate-y-4 sm:rotate-[1deg]",
 		details:
-			"Created a behind-the-ear EEG system with custom PCB, analog filtering, and ESP32 BLE transmission. Validated through wear and reliability testing with strong signal quality at lower cost.",
+			"Bioengineering Intern at Stanford Institutes of Medicinal Research (Summer 2025), selected 1/20 from 1,800+ applicants. Project Intern at Solo Technologies building on-device iOS AI under model-size and latency constraints, presented at CES 2026.",
 	},
 	{
-		title: "Project Intern — Solo Technologies",
-		subtitle: "Sep 2024 – Mar 2025",
-		cardClass: "sm:col-span-1 sm:-translate-y-1 sm:rotate-[-0.5deg]",
-		details:
-			"Built an on-device iOS flagship product under strict model-size and latency constraints for cloud-free AI. Presented at CES 2026.",
-	},
-	{
-		title: "Co-founder & CTO — Share-On",
-		subtitle: "Mar 2024 – Present",
-		cardClass: "sm:col-span-2 sm:translate-y-2 sm:rotate-[0.75deg]",
-		details:
-			"Led product definition, architecture, and iOS implementation for a teen mental health platform that grew to 7,000+ users in three months.",
-	},
-	{
-		title: "Independent Research — Peter Tass Lab, Stanford",
-		subtitle: "Jun 2023 – Present",
-		cardClass: "sm:col-span-1 sm:rotate-[-1deg]",
-		details:
-			"Published comparative analysis on EEG-based seizure prediction and presented as the only high school presenter at IEEE Body Sensor Networks.",
-	},
-	{
-		title: "Education + Awards",
-		subtitle: "Stanford incoming freshman",
+		title: "Awards",
+		subtitle: "Science, engineering, and scholarship",
 		cardClass: "sm:col-span-2 sm:-translate-y-2 sm:rotate-[0.5deg]",
 		details:
-			"Intended focus in biomechanical engineering, computer science, and symbolic systems. Highlights include Pete Conrad Scholar, Bryan Cameron Impact Scholar Finalist, Coca-Cola Scholar Semifinalist, and IEEE conference acceptances.",
+			"Highlights include Pete Conrad Scholar, Bryan Cameron Impact Scholar Finalist, Coca-Cola Scholar Semifinalist, accepted research to IEEE venues, Best Poster at IEEE MIT URTC, and top placements at Synopsys and California science fairs.",
 	},
 ];
 
@@ -50,9 +29,9 @@ export default function Home() {
 	return (
 		<main className="min-h-screen p-8 sm:p-14">
 			<div className="mx-auto w-full max-w-5xl space-y-14 relative">
-				<aside className="body sm:fixed sm:right-6 sm:top-10 sm:text-right space-y-2 z-30">
+				<aside className="body text-base sm:fixed sm:right-6 sm:top-10 sm:text-right space-y-2 z-30">
 					<p className="text-slate-300">contact + links</p>
-					<div className="flex sm:flex-col flex-wrap gap-x-3 gap-y-1 sm:items-end">
+					<div className="flex sm:flex-col flex-wrap gap-x-3 gap-y-2 sm:items-end">
 						<Link text="email" href="mailto:krishnaswamynikhil@gmail.com" />
 						<Link text="phone" href="tel:+14085500924" />
 						<Link text="resume" href="/resume.pdf" />
