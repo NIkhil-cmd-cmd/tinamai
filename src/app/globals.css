@@ -18,7 +18,7 @@ body {
 		@apply font-mono text-sm;
 	}
 	.link {
-		@apply underline underline-offset-4 decoration-dotted decoration-slate-500 transition-colors hover:underline;
+		@apply inline-block underline underline-offset-4 decoration-dotted decoration-slate-500 transition-all duration-150 hover:underline hover:scale-110 origin-left;
 	}
 }
 

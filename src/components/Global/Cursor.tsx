@@ -4,6 +4,7 @@ import cursor from "@/assets/cursor.svg";
 
 const Cursor = () => {
 	const cursorRef = useRef<HTMLImageElement>(null); // use ref to directly manipulate the DOM element
+	const glowRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		// function to move the cursor
@@ -16,6 +17,11 @@ const Cursor = () => {
 				cursorRef.current.style.left = `${x}px`;
 				cursorRef.current.style.top = `${y}px`;
 				cursorRef.current.style.display = "block";
+				if (glowRef.current) {
+					glowRef.current.style.left = `${x}px`;
+					glowRef.current.style.top = `${y}px`;
+					glowRef.current.style.display = "block";
+				}
 			}
 		};
 
@@ -23,6 +29,9 @@ const Cursor = () => {
 		const handleMouseOut = (e: MouseEvent) => {
 			if (cursorRef.current && (!e.relatedTarget || e.relatedTarget === null)) {
 				cursorRef.current.style.display = "none";
+				if (glowRef.current) {
+					glowRef.current.style.display = "none";
+				}
 			}
 		};
 
@@ -40,21 +49,39 @@ const Cursor = () => {
 	}, []);
 
 	return (
-		<Image
-			ref={cursorRef}
-			src={cursor}
-			alt="cursor"
-			width={32}
-			height={32}
-			style={{
-				position: "fixed",
-				left: "0px",
-				top: "0px",
-				zIndex: 20,
-				pointerEvents: "none", // ensure the image does not interfere with other elements
-				display: "none", // start with cursor hidden
-			}}
-		/>
+		<>
+			<div
+				ref={glowRef}
+				style={{
+					position: "fixed",
+					left: "0px",
+					top: "0px",
+					transform: "translate(-50%, -50%)",
+					zIndex: 18,
+					pointerEvents: "none",
+					display: "none",
+					width: "64px",
+					height: "64px",
+					borderRadius: "9999px",
+					background: "radial-gradient(circle, rgba(125, 211, 252, 0.45) 0%, rgba(56, 189, 248, 0.18) 40%, rgba(15, 23, 42, 0) 75%)",
+				}}
+			/>
+			<Image
+				ref={cursorRef}
+				src={cursor}
+				alt="cursor"
+				width={32}
+				height={32}
+				style={{
+					position: "fixed",
+					left: "0px",
+					top: "0px",
+					zIndex: 20,
+					pointerEvents: "none",
+					display: "none",
+				}}
+			/>
+		</>
 	);
 };
 

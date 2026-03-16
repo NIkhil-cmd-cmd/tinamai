@@ -1,4 +1,5 @@
 import Intro from "./Intro";
+import Link from "../Global/Link";
 
 const specifics = [
 	{
@@ -48,7 +49,18 @@ const specifics = [
 export default function Home() {
 	return (
 		<main className="min-h-screen p-8 sm:p-14">
-			<div className="mx-auto w-full max-w-5xl space-y-14">
+			<div className="mx-auto w-full max-w-5xl space-y-14 relative">
+				<aside className="body sm:fixed sm:right-6 sm:top-10 sm:text-right space-y-2 z-30">
+					<p className="text-slate-300">contact + links</p>
+					<div className="flex sm:flex-col flex-wrap gap-x-3 gap-y-1 sm:items-end">
+						<Link text="email" href="mailto:krishnaswamynikhil@gmail.com" />
+						<Link text="phone" href="tel:+14085500924" />
+						<Link text="resume" href="/resume.pdf" />
+						<Link text="github" href="https://github.com/" />
+						<Link text="linkedin" href="https://linkedin.com/" />
+						<Link text="lists" href="/lists" />
+					</div>
+				</aside>
 				<Intro />
 				<section className="space-y-4">
 					<h2 className="font-mono text-sm text-slate-300 uppercase tracking-wide">specifics</h2>
