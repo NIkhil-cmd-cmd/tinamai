@@ -10,7 +10,7 @@
 @tailwind variants;
 
 body {
-	@apply text-white bg-blue-950;
+	@apply text-white bg-slate-950;
 }
 
 @layer base {
