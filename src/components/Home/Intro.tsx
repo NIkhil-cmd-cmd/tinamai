@@ -11,8 +11,17 @@ const Intro = () => {
 				className="text-base sm:text-lg max-w-3xl"
 				replayOn={false}
 			/>
-			<div className="pt-2">
-				<Image src="/profile.jpg" alt="Nikhil Krishnaswamy" height={300} width={225} quality={90} priority itemProp="image" className="rounded-sm" />
+			<div className="pt-2 inline-block overflow-hidden rounded-sm">
+				<Image
+					src="/profile.jpg"
+					alt="Nikhil Krishnaswamy"
+					height={300}
+					width={225}
+					quality={90}
+					priority
+					itemProp="image"
+					className="rounded-sm transition-transform duration-300 hover:scale-[1.03]"
+				/>
 			</div>
 		</div>
 	);

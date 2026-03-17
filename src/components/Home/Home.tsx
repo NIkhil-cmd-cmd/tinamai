@@ -1,67 +1,77 @@
+"use client";
+
+import { useMemo, useState } from "react";
 import Intro from "./Intro";
 import Link from "../Global/Link";
 import Image from "next/image";
 
 type PortfolioItem = {
+	id: string;
+	section: "Research" | "Internships" | "Awards";
 	title: string;
 	meta: string;
-	image: string;
+	summary: string;
 	details: string[];
+	image?: string;
 };
 
-const research: PortfolioItem[] = [
+const portfolioItems: PortfolioItem[] = [
 	{
+		id: "research-tass-lab",
+		section: "Research",
 		title: "Peter Tass Lab, Stanford",
 		meta: "Jun 2023 – Present",
-		image: "/profile.jpg",
+		summary: "Computational neuroscience research focused on seizure prediction and suppression.",
 		details: [
-			"Independent research in EEG-based seizure detection and forecasting.",
-			"Comparative analysis of supervised seizure prediction approaches.",
-			"Neural mass modeling with The Virtual Brain for stimulation strategy testing.",
+			"Built a comparative analysis of EEG-based seizure detection and seizure forecasting pipelines.",
+			"Evaluated supervised learning strategies for forecasting performance across clinically relevant scenarios.",
+			"Collaborated on neural mass model simulations using The Virtual Brain to study seizure suppression strategies.",
 		],
 	},
 	{
-		title: "IEEE Research Presentations",
+		id: "research-ieee",
+		section: "Research",
+		title: "IEEE Research Track",
 		meta: "Body Sensor Networks + Neural Engineering",
-		image: "/profile.jpg",
+		summary: "Presented and published work in biomedical sensing and neuroengineering venues.",
 		details: [
-			"Only high school presenter at IEEE Body Sensor Networks.",
-			"Research accepted to IEEE Neural Engineering and IEEE BSN venues.",
-			"Focus on translating computational findings toward clinical relevance.",
+			"Presented as the only high school speaker at IEEE Body Sensor Networks.",
+			"Accepted research to IEEE Neural Engineering and IEEE Body Sensor Networks.",
+			"Framed technical findings around translational impact for practical clinical workflows.",
 		],
 	},
-];
-
-const internships: PortfolioItem[] = [
 	{
+		id: "internship-simr",
+		section: "Internships",
 		title: "Stanford Institutes of Medicinal Research",
 		meta: "Bioengineering Intern | Jun – Aug 2025",
-		image: "/profile.jpg",
+		summary: "Designed and validated a portable fNIRS biomedical device under strict constraints.",
 		details: [
 			"Selected as 1 of 20 interns from 1,800+ applicants.",
-			"Designed a portable single-channel fNIRS device to track oxy/deoxyhemoglobin changes.",
-			"Built custom PCB (78.88mm x 43.26mm) with dual photodiodes and 740/850nm LEDs.",
-			"Optimized repeatedly to satisfy 100g weight and $50 cost constraints.",
-			"Executed iterative prototyping with soldering, drop testing, and clinical wear trials.",
+			"Designed a portable single-channel fNIRS system to capture oxy/deoxyhemoglobin signal dynamics.",
+			"Built a custom PCB (78.88mm x 43.26mm) integrating dual photodiodes and 740/850nm LEDs.",
+			"Iterated hardware design to satisfy 100g weight and $50 cost constraints.",
+			"Ran repeated prototyping cycles including soldering, drop testing, and clinical wear validation.",
 		],
 	},
 	{
+		id: "internship-solo",
+		section: "Internships",
 		title: "Solo Technologies",
 		meta: "Project Intern | Sep 2024 – Mar 2025",
-		image: "/profile.jpg",
+		summary: "Built cloud-free iOS AI experiences under model-size and latency constraints.",
 		details: [
-			"Built an on-device iOS flagship product for cloud-free AI workflows.",
-			"Worked under strict model-size, inference-time, and latency constraints.",
-			"Presented work at CES 2026.",
+			"Developed on-device iOS product functionality for privacy-preserving, cloud-free AI workflows.",
+			"Optimized for strict inference-time, model-size, and responsiveness constraints.",
+			"Presented product direction and technical outcomes at CES 2026.",
 		],
 	},
-];
-
-const awards: PortfolioItem[] = [
 	{
+		id: "awards-scholarships",
+		section: "Awards",
 		title: "Scholarships + National Recognition",
 		meta: "Academic and impact-based honors",
-		image: "/profile.jpg",
+		summary: "Recognized for academic excellence, innovation, and community impact.",
 		details: [
 			"Pete Conrad Scholar, International 2025 Conrad Challenge Power Pitch Award.",
 			"Bryan Cameron Impact Scholar Finalist (2.5% acceptance).",
@@ -69,9 +79,11 @@ const awards: PortfolioItem[] = [
 		],
 	},
 	{
+		id: "awards-research-engineering",
+		section: "Awards",
 		title: "Research + Engineering Competitions",
 		meta: "IEEE and science fair distinctions",
-		image: "/profile.jpg",
+		summary: "Top placements across research conferences and engineering competitions.",
 		details: [
 			"Best Poster at IEEE MIT Undergraduate Research Technology Conference.",
 			"1st Place, Synopsys Science & Engineering Fair — Biomedical Engineering.",
@@ -79,9 +91,11 @@ const awards: PortfolioItem[] = [
 		],
 	},
 	{
+		id: "awards-innovation-creative",
+		section: "Awards",
 		title: "Innovation + Creative Awards",
 		meta: "State and national competitions",
-		image: "/profile.jpg",
+		summary: "Honors spanning technical innovation and visual storytelling.",
 		details: [
 			"State Winner, Samsung Solve for Tomorrow — won $12k in Samsung tech for school.",
 			"1st Place, School Photographers of America Student Competition.",
@@ -89,34 +103,20 @@ const awards: PortfolioItem[] = [
 	},
 ];
 
-function PortfolioGrid({ items }: { items: PortfolioItem[] }) {
-	return (
-		<ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-			{items.map((item) => (
-				<li key={item.title} className="group relative overflow-hidden border border-slate-700 bg-slate-900/30" tabIndex={0}>
-					<Image src={item.image} alt={item.title} width={900} height={550} className="h-56 w-full object-cover opacity-85 transition-transform duration-300 group-hover:scale-105" />
-					<div className="absolute inset-0 bg-slate-950/20" />
-					<div className="absolute bottom-0 left-0 right-0 p-4">
-						<p className="body text-slate-100">{item.title}</p>
-						<p className="body text-slate-300 pt-1">{item.meta}</p>
-					</div>
-					<div className="absolute inset-0 bg-slate-950/93 p-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100">
-						<p className="body text-slate-100 pb-2">{item.title}</p>
-						<ul className="space-y-2">
-							{item.details.map((line) => (
-								<li key={line} className="body text-slate-300 leading-relaxed">
-									• {line}
-								</li>
-							))}
-						</ul>
-					</div>
-				</li>
-			))}
-		</ul>
-	);
-}
+const sectionOrder: Array<PortfolioItem["section"]> = ["Research", "Internships", "Awards"];
 
 export default function Home() {
+	const [activeId, setActiveId] = useState<string | null>(null);
+
+	const groupedItems = useMemo(() => {
+		return sectionOrder.map((section) => ({
+			section,
+			items: portfolioItems.filter((item) => item.section === section),
+		}));
+	}, []);
+
+	const activeItem = portfolioItems.find((item) => item.id === activeId) ?? null;
+
 	return (
 		<main className="min-h-screen p-8 sm:p-14">
 			<div className="mx-auto w-full max-w-5xl space-y-14 relative">
@@ -132,20 +132,59 @@ export default function Home() {
 					</div>
 				</aside>
 				<Intro />
-				<section className="space-y-12 border-t border-slate-800 pt-10">
-					<div className="space-y-3">
-						<h2 className="font-mono text-sm text-slate-300 uppercase tracking-wide">research</h2>
-						<PortfolioGrid items={research} />
+				<section className="border-t border-slate-800 pt-10 grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+					<div className="lg:col-span-3 space-y-8">
+						{groupedItems.map(({ section, items }) => (
+							<div key={section} className="space-y-3">
+								<h2 className="font-mono text-sm text-slate-300 uppercase tracking-wide">{section.toLowerCase()}</h2>
+								<ul className="space-y-3">
+									{items.map((item) => (
+										<li
+											key={item.id}
+											onMouseEnter={() => setActiveId(item.id)}
+											onFocus={() => setActiveId(item.id)}
+											tabIndex={0}
+											className="group cursor-pointer rounded-2xl border border-white/15 bg-white/5 backdrop-blur-lg px-4 py-4 transition-all duration-200 hover:bg-white/10 hover:border-white/30 focus:outline-none focus:ring-2 focus:ring-sky-400/40"
+										>
+											<p className="body text-slate-100 text-base">{item.title}</p>
+											<p className="body text-slate-400 pt-1">{item.meta}</p>
+											<p className="body text-slate-300 pt-3 leading-relaxed">{item.summary}</p>
+										</li>
+									))}
+								</ul>
+							</div>
+						))}
 					</div>
 
-					<div className="space-y-4 border-t border-slate-800 pt-8">
-						<h2 className="font-mono text-sm text-slate-300 uppercase tracking-wide">internships</h2>
-						<PortfolioGrid items={internships} />
-					</div>
-
-					<div className="space-y-3 border-t border-slate-800 pt-8">
-						<h2 className="font-mono text-sm text-slate-300 uppercase tracking-wide">awards</h2>
-						<PortfolioGrid items={awards} />
+					<div className="lg:col-span-2 lg:sticky lg:top-24">
+						<div className="rounded-2xl border border-white/20 bg-white/8 backdrop-blur-xl p-4 min-h-[420px]">
+							{activeItem ? (
+								<div className="space-y-4">
+									<div className="rounded-xl overflow-hidden border border-white/20 bg-slate-900/60 h-48 flex items-center justify-center">
+										{activeItem.image ? (
+											<Image src={activeItem.image} alt={activeItem.title} width={700} height={420} className="h-full w-full object-cover" />
+										) : (
+											<p className="body text-slate-400 text-center px-4">add a portfolio image for this entry to preview it here</p>
+										)}
+									</div>
+									<div>
+										<p className="body text-slate-100 text-base">{activeItem.title}</p>
+										<p className="body text-slate-400 pt-1">{activeItem.meta}</p>
+										<ul className="pt-3 space-y-2">
+											{activeItem.details.map((line) => (
+												<li key={line} className="body text-slate-300 leading-relaxed">
+													• {line}
+												</li>
+											))}
+										</ul>
+									</div>
+								</div>
+							) : (
+								<div className="h-full min-h-[380px] flex items-center justify-center">
+									<p className="body text-slate-400 text-center max-w-[22ch]">hover an entry on the left to see its details and portfolio preview here</p>
+								</div>
+							)}
+						</div>
 					</div>
 				</section>
 			</div>

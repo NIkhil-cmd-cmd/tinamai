@@ -63,7 +63,9 @@ const Cursor = () => {
 					width: "120px",
 					height: "120px",
 					borderRadius: "9999px",
-					background: "radial-gradient(circle, rgba(125, 211, 252, 0.2) 0%, rgba(56, 189, 248, 0.1) 42%, rgba(15, 23, 42, 0) 78%)",
+					background:
+						"radial-gradient(circle, rgba(125, 211, 252, 0.22) 0%, rgba(125, 211, 252, 0.16) 18%, rgba(56, 189, 248, 0.1) 40%, rgba(56, 189, 248, 0.05) 60%, rgba(15, 23, 42, 0.015) 78%, rgba(15, 23, 42, 0) 100%)",
+					filter: "blur(1px)",
 				}}
 			/>
 			<Image
@@ -76,6 +78,7 @@ const Cursor = () => {
 					position: "fixed",
 					left: "0px",
 					top: "0px",
+					transform: "translate(-50%, -50%)",
 					zIndex: 20,
 					pointerEvents: "none",
 					display: "none",
