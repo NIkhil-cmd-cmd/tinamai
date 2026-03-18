@@ -43,7 +43,15 @@ function ScrambleText({
         ref.current = node;
     };
 
-    return <p ref={setRef} onMouseOver={replayOn ? replay : undefined} onFocus={replayOn ? replay : undefined} className={`body ${className}`} />;
+    return (
+        <p
+            ref={setRef}
+            onMouseEnter={replayOn ? replay : undefined}
+            onPointerEnter={replayOn ? replay : undefined}
+            onFocus={replayOn ? replay : undefined}
+            className={`body ${className}`}
+        />
+    );
 }
 
 export default ScrambleText;

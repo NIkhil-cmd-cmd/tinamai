@@ -200,7 +200,7 @@ export default function Home() {
 										>
 											<ScrambleText
 												text={item.summary}
-												settings={{ speed: 0.45, tick: 8 }}
+												settings={{ speed: 1.6, tick: 1, step: 3.5, scramble: 4, chance: 1 }}
 												className={`text-base leading-relaxed transition-colors duration-200 ${
 													activeId === item.id ? "text-slate-100" : "text-slate-300"
 												}`}
