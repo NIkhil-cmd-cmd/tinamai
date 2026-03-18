@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Intro from "./Intro";
 import Link from "../Global/Link";
 import Image from "next/image";
+import ScrambleText from "../Global/ScrambleText";
 
 type PortfolioItem = {
 	id: string;
@@ -195,11 +196,15 @@ export default function Home() {
 											onMouseEnter={() => setActiveId(item.id)}
 											onFocus={() => setActiveId(item.id)}
 											tabIndex={0}
-											className="group cursor-pointer rounded-2xl border border-white/15 bg-white/5 backdrop-blur-lg px-4 py-4 transition-all duration-200 hover:bg-white/10 hover:border-white/30 focus:outline-none focus:ring-2 focus:ring-sky-400/40"
+											className="group cursor-pointer border-b border-white/10 pb-2 focus:outline-none focus:ring-2 focus:ring-sky-400/40"
 										>
-											<p className="body text-slate-100 text-base">{item.title}</p>
-											<p className="body text-slate-400 pt-1">{item.meta}</p>
-											<p className="body text-slate-300 pt-3 leading-relaxed">{item.summary}</p>
+											<ScrambleText
+												text={item.summary}
+												settings={{ speed: 0.45, tick: 8 }}
+												className={`text-base leading-relaxed transition-colors duration-200 ${
+													activeId === item.id ? "text-slate-100" : "text-slate-300"
+												}`}
+											/>
 										</li>
 									))}
 								</ul>
