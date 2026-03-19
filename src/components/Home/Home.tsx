@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Intro from "./Intro";
 import Image from "next/image";
 import ScrambleText from "../Global/ScrambleText";
+import Link from "../Global/Link";
 
 type MediaItem = {
 	src: string;
@@ -313,14 +314,11 @@ export default function Home() {
 									{awardsList.map((award) => (
 										<li key={award.title} className={`flex items-start justify-between gap-4 border-b ${colors.border} pb-3`}>
 											{award.href ? (
-												<a
+												<Link
+													text={award.title}
 													href={award.href}
-													target="_blank"
-													rel="noopener noreferrer"
-													className={`body ${colors.textMutedAlt} text-base leading-relaxed hover:text-slate-100 transition-colors`}
-												>
-													{award.title}
-												</a>
+													className={`${colors.textMutedAlt} hover:text-slate-100`}
+												/>
 											) : (
 												<p className={`body ${colors.textMutedAlt} text-base leading-relaxed`}>{award.title}</p>
 											)}
