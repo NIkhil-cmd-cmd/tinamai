@@ -1,10 +1,12 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import Intro from "./Intro";
 import Link from "../Global/Link";
 import Image from "next/image";
 import ScrambleText from "../Global/ScrambleText";
+import { useTheme } from "@/context/ThemeContext";
+import { getThemeColors } from "@/utils/themeColors";
 
 type PortfolioItem = {
 	id: string;
@@ -155,7 +157,22 @@ const portfolioItems: PortfolioItem[] = [
 ];
 
 export default function Home() {
+	const { theme } = useTheme();
+	const colors = getThemeColors(theme);
 	const [activeId, setActiveId] = useState<string | null>(null);
+	const [scrollOpacity, setScrollOpacity] = useState(1);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			const scrollY = window.scrollY;
+			const fadeStart = 80;
+			const fadeEnd = 300;
+			const opacity = Math.max(0, 1 - (scrollY - fadeStart) / (fadeEnd - fadeStart));
+			setScrollOpacity(Math.max(0, opacity));
+		};
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
 
 	const awardsItems = useMemo(() => {
 		return portfolioItems.filter((item) => item.section === "Awards");
@@ -166,23 +183,21 @@ export default function Home() {
 	return (
 		<main className="min-h-screen p-8 sm:p-14">
 			<div className="mx-auto w-full max-w-5xl space-y-14 relative">
-				<aside className="body text-base sm:fixed sm:right-6 sm:top-10 sm:text-right space-y-2 z-30">
-					<p className="text-slate-300">contact + links</p>
-					<div className="flex sm:flex-col flex-wrap gap-x-3 gap-y-2 sm:items-end">
-						<Link text="email" href="mailto:krishnaswamynikhil@gmail.com" />
-						<Link text="phone" href="tel:+14085500924" />
-						<Link text="resume" href="/resume.pdf" />
-						<Link text="github" href="https://github.com/" />
-						<Link text="linkedin" href="https://linkedin.com/" />
-						<Link text="photography" href="/photography" />
-						<Link text="lists" href="/lists" />
+			<aside className={`body text-base sm:fixed sm:right-6 sm:top-10 sm:text-right space-y-2 z-30 transition-opacity duration-300 ${colors.text}`} style={{ opacity: scrollOpacity }}>
+				<p className={colors.textMutedAlt}>contact</p>
+				<div className="flex sm:flex-col flex-wrap gap-x-3 gap-y-2 sm:items-end">
+					<Link text="email" href="mailto:krishnaswamynikhil@gmail.com" />
+					<Link text="resume" href="/resume.pdf" />
+					<Link text="github" href="https://github.com/" />
+					<Link text="linkedin" href="https://linkedin.com/" />
+					<Link text="photography" href="/photography" />
 					</div>
 				</aside>
 				<Intro />
-				<section className="border-t border-slate-800 pt-10 grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+				<section className={`border-t ${colors.border} pt-10 grid grid-cols-1 lg:grid-cols-5 gap-8 items-start`}>
 					<div className="lg:col-span-3 space-y-8">
 						<div className="space-y-3">
-							<h2 className="font-mono text-sm text-slate-300 uppercase tracking-wide">awards</h2>
+							<h2 className={`font-mono text-sm ${colors.textMutedAlt} uppercase tracking-wide`}>awards</h2>
 							<ul className="space-y-2">
 								{awardsItems.map((item) => (
 									<li
@@ -190,13 +205,13 @@ export default function Home() {
 										onMouseEnter={() => setActiveId(item.id)}
 										onFocus={() => setActiveId(item.id)}
 										tabIndex={0}
-										className="group cursor-pointer border-b border-white/10 pb-1 transition-all duration-200 ease-out hover:border-white/30 hover:translate-x-[2px] focus:outline-none focus:ring-1 focus:ring-sky-400/40"
+											className={`group cursor-pointer border-b ${colors.border} pb-1 transition-all duration-200 ease-out hover:${colors.borderBright} hover:translate-x-[2px] focus:outline-none focus:ring-1 focus:ring-sky-400/40`}
 									>
 										<ScrambleText
 											text={item.summary}
 											settings={{ speed: 1.6, tick: 1, step: 3.5, scramble: 4, chance: 1 }}
 											className={`text-sm leading-relaxed transition-colors duration-200 ${
-												activeId === item.id ? "text-slate-100" : "text-slate-400"
+													activeId === item.id ? colors.text : colors.textMuted
 											}`}
 										/>
 									</li>
@@ -206,23 +221,23 @@ export default function Home() {
 					</div>
 
 					<div className="lg:col-span-2 lg:sticky lg:top-24">
-						<div className="rounded-2xl border border-white/20 bg-white/8 backdrop-blur-xl p-4 min-h-[420px]">
+							<div className={`rounded-lg ${colors.panelBorder} ${colors.panelBg} p-6 min-h-[420px] flex flex-col`}>
 							{activeItem ? (
-								<div className="space-y-4">
-									<div className="rounded-xl overflow-hidden border border-white/20 bg-slate-900/60 h-48 flex items-center justify-center">
-										{activeItem.image ? (
-											<Image src={activeItem.image} alt={activeItem.title} width={700} height={420} className="h-full w-full object-cover" />
-										) : (
-											<p className="body text-slate-400 text-center px-4">add a portfolio image for this entry to preview it here</p>
-										)}
-									</div>
+								<div className="space-y-4 flex flex-col h-full">
 									<div>
-										<p className="body text-slate-100 text-base">{activeItem.title}</p>
-										<p className="body text-slate-400 pt-1">{activeItem.meta}</p>
-										<ul className="pt-3 space-y-2">
+											<p className={`body ${colors.text} text-sm font-semibold uppercase tracking-widest`}>{activeItem.title}</p>
+											<p className={`body ${colors.textMuted} text-xs pt-1 uppercase tracking-wider`}>{activeItem.meta}</p>
+									</div>
+									{activeItem.image && (
+													<div className={`rounded-md overflow-hidden border ${colors.panelBorder} ${colors.accentBg} h-48 flex items-center justify-center flex-shrink-0`}>
+											<Image src={activeItem.image} alt={activeItem.title} width={700} height={420} className="h-full w-full object-cover" />
+										</div>
+									)}
+											<div className={`border-t ${colors.border} pt-4 flex-1 overflow-y-auto`}>
+										<ul className="space-y-3">
 											{activeItem.details.map((line) => (
-												<li key={line} className="body text-slate-300 leading-relaxed">
-													• {line}
+													<li key={line} className={`body ${colors.textMutedAlt} text-sm leading-relaxed`}>
+													{line}
 												</li>
 											))}
 										</ul>
@@ -230,7 +245,7 @@ export default function Home() {
 								</div>
 							) : (
 								<div className="h-full min-h-[380px] flex items-center justify-center">
-									<p className="body text-slate-400 text-center max-w-[22ch]">hover an award on the left to see details and preview here</p>
+										<p className={`body ${colors.textMuted} text-center text-sm`}>select an award</p>
 								</div>
 							)}
 						</div>
