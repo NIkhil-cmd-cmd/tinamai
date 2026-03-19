@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import ScrambleText from "../Global/ScrambleText";
+import Link from "../Global/Link";
 import { useTheme } from "@/context/ThemeContext";
 import { getThemeColors } from "@/utils/themeColors";
 
@@ -18,6 +19,16 @@ const Intro = () => {
 					className="text-base sm:text-lg"
 					replayOn={false}
 				/>
+				<div className="pt-4 space-y-2">
+					<p className={colors.textMutedAlt}>contact</p>
+					<div className="flex flex-wrap gap-x-3 gap-y-2">
+						<Link text="email" href="mailto:krishnaswamynikhil@gmail.com" />
+						<Link text="resume" href="/resume.pdf" />
+						<Link text="github" href="https://github.com/" />
+						<Link text="linkedin" href="https://linkedin.com/" />
+						<Link text="photography" href="/photography" />
+					</div>
+				</div>
 			</div>
 			<div className="sm:flex-shrink-0 inline-block overflow-hidden rounded-lg">
 				<Image

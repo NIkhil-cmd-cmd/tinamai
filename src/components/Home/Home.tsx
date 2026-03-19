@@ -160,19 +160,6 @@ export default function Home() {
 	const { theme } = useTheme();
 	const colors = getThemeColors(theme);
 	const [activeId, setActiveId] = useState<string | null>(null);
-	const [scrollOpacity, setScrollOpacity] = useState(1);
-
-	useEffect(() => {
-		const handleScroll = () => {
-			const scrollY = window.scrollY;
-			const fadeStart = 80;
-			const fadeEnd = 300;
-			const opacity = Math.max(0, 1 - (scrollY - fadeStart) / (fadeEnd - fadeStart));
-			setScrollOpacity(Math.max(0, opacity));
-		};
-		window.addEventListener("scroll", handleScroll);
-		return () => window.removeEventListener("scroll", handleScroll);
-	}, []);
 
 	const groupedItems = useMemo(() => {
 		const sectionOrder: Array<PortfolioItem["section"]> = ["Research", "Internships", "Awards"];
@@ -187,16 +174,7 @@ export default function Home() {
 	return (
 		<main className="min-h-screen p-8 sm:p-14">
 			<div className="mx-auto w-full max-w-5xl space-y-14 relative">
-			<aside className={`body text-base sm:fixed sm:right-6 sm:top-10 sm:text-right space-y-2 z-30 transition-opacity duration-300 ${colors.text}`} style={{ opacity: scrollOpacity }}>
-				<p className={colors.textMutedAlt}>contact</p>
-				<div className="flex sm:flex-col flex-wrap gap-x-3 gap-y-2 sm:items-end">
-					<Link text="email" href="mailto:krishnaswamynikhil@gmail.com" />
-					<Link text="resume" href="/resume.pdf" />
-					<Link text="github" href="https://github.com/" />
-					<Link text="linkedin" href="https://linkedin.com/" />
-					<Link text="photography" href="/photography" />
-					</div>
-				</aside>
+
 				<Intro />
 				<section className={`border-t ${colors.border} pt-10 grid grid-cols-1 lg:grid-cols-5 gap-8 items-start`}>
 					<div className="lg:col-span-3 space-y-8">
