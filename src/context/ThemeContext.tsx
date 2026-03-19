@@ -28,13 +28,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 		localStorage.setItem("theme", newTheme);
 	};
 
-	if (!mounted) {
-		return <>{children}</>;
-	}
-
+	// Always return with context provider, even before mounted
+	// This prevents useTheme errors during SSR/initial render
 	return (
 		<ThemeContext.Provider value={{ theme, setTheme }}>
-			<div className={getThemeClass(theme)}>{children}</div>
+			<div className={getThemeClass(theme)} suppressHydrationWarning>
+				{children}
+			</div>
 		</ThemeContext.Provider>
 	);
 }

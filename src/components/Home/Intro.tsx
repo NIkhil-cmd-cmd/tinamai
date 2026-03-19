@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import ScrambleText from "../Global/ScrambleText";
 import { useTheme } from "@/context/ThemeContext";
