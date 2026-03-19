@@ -174,8 +174,12 @@ export default function Home() {
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
 
-	const awardsItems = useMemo(() => {
-		return portfolioItems.filter((item) => item.section === "Awards");
+	const groupedItems = useMemo(() => {
+		const sectionOrder: Array<PortfolioItem["section"]> = ["Research", "Internships", "Awards"];
+		return sectionOrder.map((section) => ({
+			section,
+			items: portfolioItems.filter((item) => item.section === section),
+		}));
 	}, []);
 
 	const activeItem = portfolioItems.find((item) => item.id === activeId) ?? null;
@@ -196,28 +200,30 @@ export default function Home() {
 				<Intro />
 				<section className={`border-t ${colors.border} pt-10 grid grid-cols-1 lg:grid-cols-5 gap-8 items-start`}>
 					<div className="lg:col-span-3 space-y-8">
-						<div className="space-y-3">
-							<h2 className={`font-mono text-sm ${colors.textMutedAlt} uppercase tracking-wide`}>awards</h2>
-							<ul className="space-y-2">
-								{awardsItems.map((item) => (
-									<li
-										key={item.id}
-										onMouseEnter={() => setActiveId(item.id)}
-										onFocus={() => setActiveId(item.id)}
-										tabIndex={0}
+						{groupedItems.map(({ section, items }) => (
+							<div key={section} className="space-y-3">
+								<h2 className={`font-mono text-sm ${colors.textMutedAlt} uppercase tracking-wide`}>{section.toLowerCase()}</h2>
+								<ul className="space-y-2">
+									{items.map((item) => (
+										<li
+											key={item.id}
+											onMouseEnter={() => setActiveId(item.id)}
+											onFocus={() => setActiveId(item.id)}
+											tabIndex={0}
 											className={`group cursor-pointer border-b ${colors.border} pb-1 transition-all duration-200 ease-out hover:${colors.borderBright} hover:translate-x-[2px] focus:outline-none focus:ring-1 focus:ring-sky-400/40`}
-									>
-										<ScrambleText
-											text={item.summary}
-											settings={{ speed: 1.6, tick: 1, step: 3.5, scramble: 4, chance: 1 }}
-											className={`text-sm leading-relaxed transition-colors duration-200 ${
-													activeId === item.id ? colors.text : colors.textMuted
-											}`}
-										/>
-									</li>
-								))}
-							</ul>
-						</div>
+										>
+											<ScrambleText
+												text={item.summary}
+												settings={{ speed: 1.6, tick: 1, step: 3.5, scramble: 4, chance: 1 }}
+												className={`text-sm leading-relaxed transition-colors duration-200 ${
+														activeId === item.id ? colors.text : colors.textMuted
+												}`}
+											/>
+										</li>
+									))}
+								</ul>
+							</div>
+						))}
 					</div>
 
 					<div className="lg:col-span-2 lg:sticky lg:top-24">
@@ -245,7 +251,7 @@ export default function Home() {
 								</div>
 							) : (
 								<div className="h-full min-h-[380px] flex items-center justify-center">
-										<p className={`body ${colors.textMuted} text-center text-sm`}>select an award</p>
+									<p className={`body ${colors.textMuted} text-center text-sm`}>select an item</p>
 								</div>
 							)}
 						</div>

@@ -11,10 +11,8 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-const defaultTheme: Theme = "dark";
-
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-	const [theme, setThemeState] = useState<Theme>(defaultTheme);
+	const [theme, setThemeState] = useState<Theme>("dark");
 	const [mounted, setMounted] = useState(false);
 
 	useEffect(() => {
@@ -30,11 +28,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 		localStorage.setItem("theme", newTheme);
 	};
 
+	if (!mounted) {
+		return <>{children}</>;
+	}
+
 	return (
 		<ThemeContext.Provider value={{ theme, setTheme }}>
-			<div className={mounted ? getThemeClass(theme) : getThemeClass(defaultTheme)}>
-				{children}
-			</div>
+			<div className={getThemeClass(theme)}>{children}</div>
 		</ThemeContext.Provider>
 	);
 }
@@ -42,8 +42,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 export function useTheme() {
 	const context = useContext(ThemeContext);
 	if (!context) {
-		// Return default theme for SSR/build time
-		return { theme: defaultTheme, setTheme: () => {} };
+		throw new Error("useTheme must be used within ThemeProvider");
 	}
 	return context;
 }
