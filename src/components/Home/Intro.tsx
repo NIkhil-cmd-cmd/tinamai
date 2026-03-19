@@ -3,46 +3,46 @@
 import Image from "next/image";
 import ScrambleText from "../Global/ScrambleText";
 import Link from "../Global/Link";
-import { useTheme } from "@/context/ThemeContext";
-import { getThemeColors } from "@/utils/themeColors";
 
 const Intro = () => {
-	const { theme } = useTheme();
-	const colors = getThemeColors(theme);
 	return (
-		<div className="flex flex-col-reverse sm:flex-row gap-6 sm:gap-8 items-start max-w-5xl">
-			<div className="space-y-6 flex-1">
-				<h1 className={`font-serif2 text-3xl sm:text-5xl leading-tight ${colors.text}`}>hi, i&apos;m nikhil.</h1>
+		<section className="border-y border-white/10 py-8 sm:py-10">
+			<div className="flex flex-col-reverse lg:flex-row gap-8 lg:gap-12 items-start">
+				<div className="space-y-6 flex-1">
+					<h1 className="font-serif2 text-3xl sm:text-5xl leading-tight text-slate-100">
+						hi, i&apos;m nikhil.
+					</h1>
 				<ScrambleText
 					text="biomechanical engineering & computer science @ Stanford, building wearable neurotechnology at the intersection of bioengineering, hardware, and machine learning."
 					settings={{ speed: 0.5 }}
-					className="text-base sm:text-lg"
+					className="text-sm sm:text-base leading-relaxed max-w-3xl text-slate-300"
 					replayOn={false}
 				/>
-				<div className="pt-4 space-y-2">
-					<p className={colors.textMutedAlt}>contact</p>
-					<div className="flex flex-wrap gap-x-3 gap-y-2">
-						<Link text="email" href="mailto:krishnaswamynikhil@gmail.com" />
-						<Link text="resume" href="/resume.pdf" />
-						<Link text="github" href="https://github.com/" />
-						<Link text="linkedin" href="https://linkedin.com/" />
-						<Link text="photography" href="/photography" />
+					<div className="pt-4 border-t border-white/10 space-y-3">
+						<p className="font-mono text-xs uppercase tracking-[0.2em] text-slate-300">/ Connect</p>
+						<div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+							<Link text="email" href="mailto:krishnaswamynikhil@gmail.com" className="text-slate-100" />
+							<Link text="resume" href="/resume.pdf" className="text-slate-100" />
+							<Link text="github" href="https://github.com/" className="text-slate-100" />
+							<Link text="linkedin" href="https://linkedin.com/" className="text-slate-100" />
+							<Link text="photography" href="/photography" className="text-slate-100" />
+						</div>
 					</div>
 				</div>
+				<div className="lg:flex-shrink-0 inline-block overflow-hidden rounded-lg border border-white/20 bg-white/8 p-2">
+					<Image
+						src="/profile.jpg"
+						alt="Nikhil Krishnaswamy"
+						height={320}
+						width={240}
+						quality={90}
+						priority
+						itemProp="image"
+						className="rounded-md transition-transform duration-300 hover:scale-[1.02]"
+					/>
+				</div>
 			</div>
-			<div className="sm:flex-shrink-0 inline-block overflow-hidden rounded-lg">
-				<Image
-					src="/profile.jpg"
-					alt="Nikhil Krishnaswamy"
-					height={280}
-					width={210}
-					quality={90}
-					priority
-					itemProp="image"
-					className="rounded-lg transition-transform duration-300 hover:scale-[1.03]"
-				/>
-			</div>
-		</div>
+		</section>
 	);
 };
 

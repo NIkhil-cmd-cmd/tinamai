@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { Inter } from "next/font/google";
+import CodeBackdrop from "@/components/Global/CodeBackdrop";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -82,7 +83,8 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				{children}
+				<CodeBackdrop />
+				<div className="relative z-30">{children}</div>
 				<Analytics />
 			</body>
 		</html>

@@ -18,7 +18,7 @@ body {
 		@apply font-mono text-sm;
 	}
 	.link {
-		@apply inline-block underline underline-offset-4 decoration-dotted decoration-slate-500 transition-all duration-150 hover:underline hover:scale-110 origin-left;
+		@apply inline-block font-mono text-xs uppercase tracking-[0.18em] underline underline-offset-4 decoration-slate-500 transition-colors duration-150;
 	}
 }
 
@@ -28,10 +28,48 @@ body {
 	}
 }
 
+.code-backdrop {
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	z-index: 20;
+	overflow: hidden;
+	opacity: 0.14;
+	display: flex;
+	justify-content: center;
+	gap: 4rem;
+	padding-inline: 1.5rem;
+}
+
+.code-backdrop-track {
+	font-family: "JetBrains Mono", monospace;
+	font-size: 10px;
+	line-height: 1.7;
+	letter-spacing: 0.03em;
+	white-space: pre;
+	color: rgb(148 163 184);
+	min-width: min(560px, 44vw);
+	animation: code-flow 7s linear infinite;
+	transform: translateY(0);
+}
+
+@keyframes code-flow {
+	from {
+		transform: translateY(-18%);
+	}
+	to {
+		transform: translateY(18%);
+	}
+}
+
 @media (prefers-reduced-motion: reduce) {
 	* {
 		animation: none !important;
 		transition: none !important;
+	}
+
+	.code-backdrop {
+		opacity: 0.06;
 	}
 }
 
