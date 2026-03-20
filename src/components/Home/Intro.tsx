@@ -22,9 +22,9 @@ const Intro = () => {
 						<p className="font-mono text-xs uppercase tracking-[0.2em] text-slate-300">/ Connect</p>
 						<div className="flex flex-wrap items-center gap-x-4 gap-y-2">
 							<Link text="email" href="mailto:krishnaswamynikhil@gmail.com" className="text-slate-100" />
-							<Link text="resume" href="/resume.pdf" className="text-slate-100" />
-							<Link text="github" href="https://github.com/" className="text-slate-100" />
-							<Link text="linkedin" href="https://linkedin.com/" className="text-slate-100" />
+							<Link text="resume" href="/media/nikhil_resume.pdf" className="text-slate-100" />
+							<Link text="github" href="https://github.com/NIkhil-cmd-cmd" className="text-slate-100" />
+							<Link text="linkedin" href="https://linkedin.com/in/nikhil-krishnaswamy" className="text-slate-100" />
 							<Link text="photography" href="/photography" className="text-slate-100" />
 						</div>
 					</div>

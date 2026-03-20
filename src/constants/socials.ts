@@ -5,11 +5,11 @@ export const socials = [
 	},
 	{
 		name: "linkedin",
-		url: "https://linkedin.com/in/tinabmai/",
+		url: "https://www.linkedin.com/in/nikhil-krishnaswamy/",
 	},
 	{
 		name: "github",
-		url: "https://github.com/tina-mai",
+		url: "https://github.com/NIkhil-cmd-cmd",
 	},
 	{
 		name: "instagram",

@@ -31,7 +31,7 @@ export default function Photography() {
 						<div className="space-y-2">
 							<h1 className="font-serif2 text-4xl sm:text-5xl leading-tight">photography</h1>
 							<p className="body text-slate-400 max-w-2xl">
-								Visual storytelling through light, composition, and perspective. A collection of moments that capture essence and emotion.
+								canon eos 6d | sony a7c
 							</p>
 						</div>
 						<Link text="← back" href="/" />
